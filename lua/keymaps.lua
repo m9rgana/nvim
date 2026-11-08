@@ -1,8 +1,12 @@
--- KEY BINDS
--- vim.g allows to edit global vim variables 
+-- Leader key
 vim.g.mapleader = " "
-vim.keymap.set('n', "<leader>w", "<cmd>w<CR>") -- 'n' means it works in normal mode, the second is the keybind and the last is the command.
--- <cmd>w<CR> is better than :w<CR> because it doesn't enter the command line mode. <CR> refers to the enter key
+vim.g.maplocalleader = "\\" -- secondary mapleader
+
+-- General keymaps
+vim.keymap.set("n", "<leader>w", "<cmd>write<CR>", {
+    desc = "Save file",
+})
+
 -- Telescope keymaps
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", {
     desc = "Find Files",
@@ -20,10 +24,15 @@ vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", {
     desc = "Find Help",
 })
 
--- tabs keymaps (just the simplest) - to be added if necessary
--- Navigate between buffers
-vim.keymap.set('n', '<Tab>', '<Cmd>BufferNext<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferPrevious<CR>', { desc = 'Previous buffer' })
+-- Barbar keymaps
+vim.keymap.set("n", "<Tab>", "<Cmd>BufferNext<CR>", {
+    desc = "Next buffer",
+})
 
--- Close current buffer
-vim.keymap.set('n', '<leader>bd', '<Cmd>BufferClose<CR>', { desc = 'Close buffer' })
+vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferPrevious<CR>", {
+    desc = "Previous buffer",
+})
+
+vim.keymap.set("n", "<leader>bd", "<Cmd>BufferClose<CR>", {
+    desc = "Close buffer",
+})
