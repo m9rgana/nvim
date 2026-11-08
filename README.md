@@ -32,15 +32,31 @@ Built with **Neovim 0.12+** and **lazy.nvim**, featuring LSP support, autocomple
 The Java language server requires Java 21 or newer to run. Java projects can target different Java versions, provided the appropriate JDK is configured.
 
 ## Installation
+### 1. Clone the repository
 
-Clone the repository into your Neovim configuration directory:
+Back up your existing Neovim configuration if necessary, then clone this repository:
 
 ```bash
 git clone https://github.com/m9rgana/nvim.git ~/.config/nvim
 ```
 
-Start Neovim. lazy.nvim will automatically install the configured plugins.
+### 2. Launch Neovim
 
+```bash
+nvim
+```
+
+On the first launch, the configuration bootstraps `lazy.nvim` automatically if it is not already installed.
+
+### 3. Install plugins
+
+Inside Neovim, execute:
+
+```vim
+:Lazy sync
+```
+
+This installs the plugins specified in the configuration.
 ## Plugins
 
 | Plugin | Purpose |
