@@ -1,7 +1,7 @@
 --[[
-HERE IS M9RG'S NVIM CONFIGURATION
-it's provided with comments to explain each section
---]]
+    M9RG's Neovim configuration
+    Modular configuration with comments explaining each section.
+]]
 
 require('options') -- Nvim searches by default inside the "lua" directory
 require('keymaps')
