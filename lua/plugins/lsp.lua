@@ -82,7 +82,7 @@ return {
                 "gopls",
                 "clangd",
                 "cssls",
-                "jdtls",
+                "java_language_server",
             }
 
             -- Configure servers
@@ -92,7 +92,6 @@ return {
                     on_attach = on_attach,
                 })
             end
-
             -- Lua-specific configuration
             vim.lsp.config("lua_ls", {
                 settings = {
