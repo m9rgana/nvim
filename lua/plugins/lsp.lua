@@ -82,6 +82,7 @@ return {
                 "gopls",
                 "clangd",
                 "cssls",
+                "jdtls",
             }
 
             -- Configure servers

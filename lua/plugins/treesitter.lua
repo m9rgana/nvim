@@ -23,6 +23,7 @@ return {
                 "toml",
                 "markdown",
                 "bash",
+                "java",
             })
 
             -- Enable Tree-sitter highlighting
