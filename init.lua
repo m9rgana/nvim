@@ -7,7 +7,7 @@ require('options') -- Nvim searches by default inside the "lua" directory
 require('keymaps')
 require('pluginManager')
 
--- plugins
+-- Plugin configuration
 require('plugins.treesitter')
 require('plugins.lsp')
 require('plugins.completion')
