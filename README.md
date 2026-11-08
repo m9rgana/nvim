@@ -4,8 +4,6 @@ A modular and customized Neovim configuration built with **Neovim 0.12**, **Lua*
 
 This repository contains my personal Neovim setup, designed to provide a productive development environment with LSP support, autocompletion, syntax highlighting, file navigation, and a customized interface.
 
----
-
 ## Contents
 
 - [Features](#features)
