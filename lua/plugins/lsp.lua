@@ -11,7 +11,7 @@ return {
         config = function()
             -- LSP capabilities
             local capabilities =
-                require("cmp_nvim_lsp").default_capabilities()
+            require("cmp_nvim_lsp").default_capabilities()
 
             -- LSP attachment
             local on_attach = function(_, bufnr)
@@ -69,82 +69,104 @@ return {
                 vim.keymap.set("n", "<leader>lf", function()
                     vim.lsp.buf.format({ async = true })
                 end, {
-                    buffer = bufnr,
-                    desc = "Format buffer",
-                })
-            end
+                buffer = bufnr,
+                desc = "Format buffer",
+            })
+        end
 
-            -- Servers
-            local servers = {
-                "lua_ls",
-                "pyright",
-                "rust_analyzer",
-                "gopls",
-                "clangd",
-                "cssls",
-                "java_language_server",
-            }
+        -- Servers
+        local servers = {
+            "lua_ls",
+            "pyright",
+            "rust_analyzer",
+            "gopls",
+            "clangd",
+            "cssls",
+            "jdtls",
+        }
 
-            -- Configure servers
-            for _, server in ipairs(servers) do
-                vim.lsp.config(server, {
-                    capabilities = capabilities,
-                    on_attach = on_attach,
+        -- Configure servers
+        for _, server in ipairs(servers) do
+            vim.lsp.config(server, {
+                capabilities = capabilities,
+                on_attach = on_attach,
+            })
+        end
+        -- Java language server
+        vim.lsp.config("java_language_server", {
+            root_dir = function(bufnr, on_dir)
+                -- Look for an actual project first
+                local root = vim.fs.root(bufnr, {
+                    "pom.xml",
+                    "build.gradle",
+                    "build.gradle.kts",
+                    "settings.gradle",
+                    "settings.gradle.kts",
+                    ".git",
                 })
-            end
-            -- Lua-specific configuration
-            vim.lsp.config("lua_ls", {
-                settings = {
-                    Lua = {
-                        runtime = {
-                            version = "LuaJIT",
-                        },
-                        diagnostics = {
-                            globals = { "vim" },
-                        },
-                        workspace = {
-                            library = vim.api.nvim_get_runtime_file("", true),
-                            checkThirdParty = false,
-                        },
-                        telemetry = {
-                            enable = false,
-                        },
+
+                -- For standalone files, use their containing directory
+                if not root then
+                    local filename = vim.api.nvim_buf_get_name(bufnr)
+                    root = vim.fs.dirname(filename)
+                end
+
+                on_dir(root)
+            end,
+        })
+        -- Lua-specific configuration
+        vim.lsp.config("lua_ls", {
+            settings = {
+                Lua = {
+                    runtime = {
+                        version = "LuaJIT",
+                    },
+                    diagnostics = {
+                        globals = { "vim" },
+                    },
+                    workspace = {
+                        library = vim.api.nvim_get_runtime_file("", true),
+                        checkThirdParty = false,
+                    },
+                    telemetry = {
+                        enable = false,
                     },
                 },
-            })
+            },
+        })
 
-            -- Mason
-            require("mason").setup({
-                ui = {
-                    icons = {
-                        package_installed = "✓",
-                        package_pending = "➜",
-                        package_uninstalled = "✗",
-                    },
+        -- Mason
+        require("mason").setup({
+            ui = {
+                icons = {
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗",
                 },
-            })
+            },
+        })
 
-            require("mason-lspconfig").setup({
-                ensure_installed = servers,
-                automatic_enable = true,
-            })
+        require("mason-lspconfig").setup({
+            ensure_installed = servers,
+            automatic_enable = servers,
+        })
 
-            -- Diagnostics
-            vim.diagnostic.config({
-                virtual_text = {
-                    prefix = "●",
-                    source = "if_many",
-                },
-                float = {
-                    source = "always",
-                    border = "rounded",
-                },
-                signs = true,
-                underline = true,
-                update_in_insert = false,
-                severity_sort = true,
-            })
-        end,
-    },
+        -- Diagnostics
+        vim.diagnostic.config({
+            virtual_text = {
+                prefix = "●",
+                source = "if_many",
+            },
+            float = {
+                source = "always",
+                border = "rounded",
+            },
+            signs = true,
+            underline = true,
+            update_in_insert = false,
+            severity_sort = true,
+        })
+    end,
+},
 }
 
