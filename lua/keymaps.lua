@@ -33,6 +33,6 @@ vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferPrevious<CR>", {
     desc = "Previous buffer",
 })
 
-vim.keymap.set("n", "<leader>bd", "<Cmd>BufferClose<CR>", {
+vim.keymap.set("n", "<leader>c", "<Cmd>BufferClose<CR>", {
     desc = "Close buffer",
 })
