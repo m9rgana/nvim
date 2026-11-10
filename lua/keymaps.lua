@@ -7,6 +7,8 @@ vim.keymap.set("n", "<leader>w", "<cmd>write<CR>", {
     desc = "Save file",
 })
 
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true }) -- to exit terminal  
+
 -- Telescope keymaps
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", {
     desc = "Find Files",
